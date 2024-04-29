@@ -1,0 +1,32 @@
+import random
+from sympy import isprime, primitive_root
+
+# Step 1: Generate a random prime number between 10 and 1000
+p = random.choice([i for i in range(10, 1001) if isprime(i)])
+
+# Step 2: Calculate the primitive root modulo p
+g = primitive_root(p)
+
+# Step 3: Generate random private keys for Alice and Bob
+a = random.randint(2, p-2)
+b = random.randint(2, p-2)
+
+# Step 4: Calculate the public keys for Alice and Bob
+A = pow(g, a, p)
+B = pow(g, b, p)
+
+# Step 5: Exchange public keys between Alice and Bob
+
+# Step 6: Calculate the shared secret key for both Alice and Bob
+S_Alice = pow(B, a, p)
+S_Bob = pow(A, b, p)
+
+# Print out the table
+print("Step | Alice's Info | Bob's Info | Eve's Info")
+print("----------------------------------------------")
+print(f"  1  |      p={p}    |             |           ")
+print(f"  2  |      g={g}    |             |           ")
+print(f"  3  |      a={a}    |    b={b}    |           ")
+print(f"  4  |      A={A}    |    B={B}    |           ")
+print(f"  5  |      A={A}    |    B={B}    |           ")
+print(f"  6  |      S={S_Alice}   |    S={S_Bob}   |           ")
